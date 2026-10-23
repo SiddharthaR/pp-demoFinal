@@ -321,6 +321,9 @@ def extract_price_text(price: str) -> Optional[str]:
     price = re.sub(
         r"\s+", " ", price
     )  # clean initial text from non-breaking and extra spaces
+    price = re.sub(
+        r"[\u2018\u2019\u02bc\u2032]", "'", price
+    )  # normalize typographic apostrophes used as digit group separators
 
     if price.count("€") == 1:
         m = re.search(
